@@ -1,0 +1,75 @@
+[project]
+name = "telegram_bot_weather"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "FenZlo", email = "daniel.uporov@gmail.com"},
+]
+dependencies = [
+    "pytest-playwright>=0.5.0",
+    "playwright>=1.44.0",
+    "pytest>=8.2.2",
+    "httpx>=0.27.0",
+    "ruff>=0.4.9",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm.scripts]
+# linters
+ruff_lint_check = {shell = "echo ruff-linter: && ruff check src tests"}
+ruff_format_check = {shell = "echo ruff-formatter: && ruff format src tests --check"}
+ruff_lint = {shell = "echo ruff-linter: && ruff check src tests --fix"}
+ruff_format = {shell = "echo ruff-formatter: && ruff format src tests"}
+mypy = {shell = "echo mypy: && mypy"}
+lint = {composite = ["ruff_format", "ruff_lint", "mypy"]}
+lint_check = { composite = ["ruff_lint_check", "ruff_format_check"]}
+
+# linters settings
+[tool.ruff]
+target-version = 'py311'
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = [
+    "F",  # PyFlakes
+    "E",  # pycodestyle [Error]
+    "W", # pycodestyle [Warning]
+    "I", # isort
+    "YTT", # flake8-2020
+    "ASYNC",  # flake8-async
+    "F", # flake8-bugbear
+    "COM", # flake8-commas
+    "C4", # flake8-comprehensions
+    "ISC", # flake8-implicit-str-concat
+    "ICN", # flake8-import-conventions
+    "PIE", # flake8-pie
+    "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT", # flake8-pytest-style
+    "Q", # flake8-quotes
+    "RSE", # flake8-raise
+    "RET", # flake8-return
+    "SLOT", # flake8-slots
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "INT", # flake8-gettext
+    "PD", # pandas-vet
+    "FLY", # flynt
+    "LOG", # flake8-logging
+]
+ignore = [
+    "COM812",
+    "ISC001"
+]
+
+isort.lines-after-imports = 2
+
+[tool.mypy]
+files = [
+    "src",
+    "tests"
+]
+ignore_missing_imports = true
