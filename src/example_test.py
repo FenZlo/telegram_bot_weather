@@ -7,7 +7,7 @@ MY_LOGIN = "119998271"
 
 def run(pw: Playwright):
     chrome = pw.chromium
-    browser = chrome.launch(headless=False)
+    browser = chrome.launch(headless=True)
     page = browser.new_page()
     page.goto("https://www.gismeteo.ru", wait_until="domcontentloaded")
     page.wait_for_timeout(3000)
