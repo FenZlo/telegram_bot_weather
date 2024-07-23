@@ -7,7 +7,7 @@ MY_LOGIN = "119998271"
 
 def run(pw: Playwright):
     chrome = pw.chromium
-    browser = chrome.launch(headless=True)
+    browser = chrome.launch(headless=False)
     page = browser.new_page()
     page.goto("https://www.gismeteo.ru", wait_until="domcontentloaded")
     page.wait_for_timeout(3000)
@@ -18,8 +18,7 @@ def run(pw: Playwright):
     weather = (
         page.locator(".weathertab-wrap")
         .first.locator(".weather")
-        .locator(".weather-value")
-        .locator(".unit_temperature_c")
+        .locator(".weather-value temperature-value")
         .text_content()
     )
     browser.close()
